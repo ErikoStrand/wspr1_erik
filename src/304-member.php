@@ -6,7 +6,7 @@
     header("Location: " . "304-login.php");
     die();
   }
-?>
+?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>

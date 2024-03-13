@@ -7,7 +7,7 @@ import {
 
 module.exports = {
   content: {
-    files: ["./src/**/*.{html,js}"],
+    files: ["./src/**/*.{html,js,php}"],
     extract: fluidExtractor(),
   },
   theme: {
