@@ -3,9 +3,11 @@ include "config/database.php";
 $errorName = "";
 $errorPassword = "";
 
+
+// something is wrong with this.
 function doesUserExist($email, $username, $conn) {
-  $sqlUser = "SELECT username FROM users WHERE username = $username";
-  $sqlMail = "SELECT email FROM users WHERE email = $email";
+  $sqlUser = "SELECT username FROM users WHERE username = `$username`";
+  $sqlMail = "SELECT email FROM users WHERE email = `$email`";
 
   $resultUser = mysqli_query($conn, $sqlUser);
   $resultMail = mysqli_query($conn, $sqlMail);
@@ -45,6 +47,7 @@ if (isset($_POST["submit"])) {
   }
   if (empty($errorName) && empty($errorPassword)) {
     if (!doesUserExist($email, $username, $conn)) {
+      echo "user does not exist";
       registerUser($email, $username, $password, $conn);
     }
   }
