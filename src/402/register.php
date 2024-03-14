@@ -4,15 +4,28 @@ $errorName = "";
 $errorPassword = "";
 
 function doesUserExist($email, $username, $conn) {
-  $sql = 'SELECT username, email FROM accounts';
-  $result = mysqli_query($conn, $sql);
-  $feedback = mysqli_fetch_all($result, MYSQLI_ASSOC);
-  echo $feedback;
+  $sqlUser = "SELECT username FROM users WHERE username = $username";
+  $sqlMail = "SELECT email FROM users WHERE email = $email";
 
+  $resultUser = mysqli_query($conn, $sqlUser);
+  $resultMail = mysqli_query($conn, $sqlMail);
+  if (empty($resultMail) || empty($resultUser)) {
+    return false;
+  } else {
+    return true;
+  }
 }
 function registerUser($email, $username, $password, $conn) {
-
+  $sql = "INSERT INTO users (username, email, `password`) VALUES ('$username', '$email', '$password')";
+  if (mysqli_query($conn, $sql)) {
+    // success
+    header('Location: login.php');
+  } else {
+    // error
+    echo 'Error: ' . mysqli_error($conn);
+  }
 }
+
 if (isset($_POST["submit"])) {
   $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
   $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -20,17 +33,23 @@ if (isset($_POST["submit"])) {
   if (!ctype_alnum($username)) {
     $errorName = "Only alphanumeric characters allowed.";
   }
+
+  if (str_contains($username, " ")) {
+    $errorName .= "Can't contain whitespaces";
+  }
+
   if (strlen($password) >= 50) {
     $errorPassword = "Password can't be longer then 50 characters.";
   } else {
     $password = password_hash($password, PASSWORD_DEFAULT);
   }
-}
-echo $password . $username;
-if (empty($errorName) && empty($errorPassword)) {
-  if (!doesUserExist($email, $username, $conn)) {
-    
+  if (empty($errorName) && empty($errorPassword)) {
+    if (!doesUserExist($email, $username, $conn)) {
+      registerUser($email, $username, $password, $conn);
+    }
   }
+
+  echo $errorName . $errorPassword;
 }
 ?>
 
@@ -51,7 +70,7 @@ if (empty($errorName) && empty($errorPassword)) {
     <input class="border-2" type="text" name="username" required>
     <label for="" >Password</label>
     <input class="border-2" type="password" name="password" required>
-    <input type="submit" value="Login" name="submit" class="bg-zinc-500 border-yellow-500 text-stone-200 font-archivo font-medium tracking-wide p-2 hover:bg-zinc-700 duration-100">
+    <input type="submit" value="Register" name="submit" class="bg-zinc-500 border-yellow-500 text-stone-200 font-archivo font-medium tracking-wide p-2 hover:bg-zinc-700 duration-100">
   </form>
 </body>
 </html>

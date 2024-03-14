@@ -17,8 +17,6 @@
 <body>
   
   <form action="" method="post" class="flex flex-col p-4">
-    <label for="" >Email</label>
-    <input class="border-2" type="text" required>
     <label for="" >Username</label>
     <input class="border-2" type="text" required>
     <label for="" >Password</label>
