@@ -88,7 +88,10 @@ if (isset($_POST["submit"])) {
     <label for="" >Password</label>
     <input class="border-2" type="password" name="password" required>
     
-    <input type="submit" value="Register" name="submit" class="bg-zinc-500 border-yellow-500 text-stone-200 font-archivo font-medium tracking-wide p-2 hover:bg-zinc-700 duration-100">
+    <div class="">
+      <input type="submit" value="Register" name="submit" class="bg-zinc-500 border-yellow-500 text-stone-200 font-archivo font-medium tracking-wide p-2 hover:bg-zinc-700 duration-100">
+      <a href="login.php">Already got account?</a>
+  </div>
   </form>
 </body>
 </html>
