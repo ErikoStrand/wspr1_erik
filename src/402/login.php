@@ -39,7 +39,7 @@ function tryLoggingIn($username, $password, $conn) {
     }
   }
   }
-
+  
 echo $error;
 ?>
 
