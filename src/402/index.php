@@ -6,9 +6,11 @@
   <link href="/src/output.css" rel="stylesheet" />
   <title>Document</title>
 </head>
-<body>
-  <a href="login.php" class=" bg-zinc-950 outline-2 outline-yellow-500 text-stone-200 p-10 flex align-middle ">Login</a>
-  <a href="register.php" class=" bg-zinc-950 outline-2 outline-yellow-500 text-stone-200 p-10 flex align-middle ">Register</a>
+<body class="bg-zinc-900 h-dvh">
+  <nav class="flex flex-row justify-end gap-3">
+    <a href="login.php" class="  text-stone-200 font-archivo text-lg font-bold p-2  hover:text-stone-400 duration-100 ">Login</a>
+    <a href="register.php" class="   text-stone-200 font-archivo text-lg font-bold p-2 hover:text-stone-400 duration-100 ">Register</a>
+  </nav>
 
 </body>
 </html>
